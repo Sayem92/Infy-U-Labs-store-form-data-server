@@ -18,7 +18,13 @@ async function run() {
     try {
         const AddInformationCollection = client.db("Store-Information").collection("addInformation");
 
-        
+        //information save---
+        app.post('/addInformation', async (req, res) => {
+            const addInfo = req.body;
+            console.log(addInfo)
+            const result = await AddInformationCollection.insertOne(addInfo);
+            res.send(result);
+        });
 
         
 
