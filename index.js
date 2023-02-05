@@ -21,8 +21,15 @@ async function run() {
         //information save---
         app.post('/addInformation', async (req, res) => {
             const addInfo = req.body;
-            console.log(addInfo)
             const result = await AddInformationCollection.insertOne(addInfo);
+            res.send(result);
+        });
+
+        // get all information ---
+        app.get('/allInformation/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email };
+            const result = await AddInformationCollection.find(query).toArray();
             res.send(result);
         });
 
