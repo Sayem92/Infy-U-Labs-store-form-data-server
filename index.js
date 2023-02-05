@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId, } = require('mongodb');
 require('dotenv').config();
 
 
@@ -33,6 +33,14 @@ async function run() {
             res.send(result);
         });
 
+
+        // get task data for data---
+        app.get('/updateInfor/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await AddInformationCollection.findOne(query)
+            res.send(result);
+        });
         
 
         
