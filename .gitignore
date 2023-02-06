@@ -9,3 +9,4 @@ node_modules
             const result = await AddInformationCollection.insertOne(addInfo);
             res.send(result);
         });
+.vercel
