@@ -43,6 +43,19 @@ async function run() {
         });
         
 
+         // update information  ------------------------------
+         app.put('/allInformation/:id', async (req, res) => {
+            const id = req.params.id;
+            const updateInfo = req.body;
+            const filter = { _id: new ObjectId(id) }
+            const options = { upsert: true }
+            const updateDoc = {
+                $set: updateInfo,
+            }
+            const result = await AddInformationCollection.updateOne(filter, updateDoc, options)
+            res.send(result)
+        });
+
         
 
        
