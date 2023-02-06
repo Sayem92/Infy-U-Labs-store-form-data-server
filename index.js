@@ -23,8 +23,8 @@ async function run() {
 
 
 
-         //save user data ---------
-         app.put('/users', async (req, res) => {
+        //save user data ---------
+        app.put('/users', async (req, res) => {
             const user = req.body
             const email = user.email
             const filter = { email: email }
@@ -37,6 +37,14 @@ async function run() {
         });
 
 
+          // get admin user-----
+          app.get('/users/admin/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email };
+            const user = await usersCollection.findOne(query);
+            res.send({ isAdmin: user?.role === 'admin' });
+        });
+        
 
         //information save---
         app.post('/addInformation', async (req, res) => {
@@ -45,12 +53,13 @@ async function run() {
             res.send(result);
         });
 
+
         // get all information ---
-        app.get('/allInformation/:email', async (req, res) => {
-            const email = req.params.email;
-            const query = { email };
+        app.get('/allInformation', async (req, res) => {
+            const query = { };
             const result = await AddInformationCollection.find(query).toArray();
             res.send(result);
+
         });
 
 
@@ -61,10 +70,10 @@ async function run() {
             const result = await AddInformationCollection.findOne(query)
             res.send(result);
         });
-        
 
-         // update information  ------------------------------
-         app.put('/allInformation/:id', async (req, res) => {
+
+        // update information  ------------------------------
+        app.put('/allInformation/:id', async (req, res) => {
             const id = req.params.id;
             const updateInfo = req.body;
             const filter = { _id: new ObjectId(id) }
@@ -86,13 +95,13 @@ async function run() {
         });
 
 
-        
 
-       
 
-       
 
-       
+
+
+
+
 
 
 
